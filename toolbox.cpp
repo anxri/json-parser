@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2020 Dejan Horakovic
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+ * OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ */
+
 //
 // Created by noxx on 6/3/19.
 //
@@ -13,7 +31,7 @@ using std::vector;
  * @param delemiter
  * @return
  */
-vector<string> ANXTRI::string::split( std::string str, char delemiter )
+vector<string> styl::string::split( std::string str, char delemiter )
 {
     vector<std::string> split_str;
     std::string tmp = "";
@@ -36,7 +54,7 @@ vector<string> ANXTRI::string::split( std::string str, char delemiter )
  * @param to
  * @return
  */
-std::string ANXTRI::string::replace( std::string str, const std::string & from, const std::string & to )
+std::string styl::string::replace( std::string str, const std::string & from, const std::string & to )
 {
     size_t start_pos = 0;
     while((start_pos = str.find( from, start_pos )) != std::string::npos )
@@ -49,54 +67,10 @@ std::string ANXTRI::string::replace( std::string str, const std::string & from, 
 
 /**
  *
- * @param str
- * @return
- */
-bool ANXTRI::string::is_num( const std::string & str )
-{
-    if( str[0] == '0' || str[0] == '.' || str == "" )
-        return false;
-
-    for( int i = 0; i < str.size(); i++ )
-    {
-        switch ( str[i] ) {
-            case '0':
-                continue;
-            case '1':
-                continue;
-            case '2':
-                continue;
-            case '3':
-                continue;
-            case '4':
-                continue;
-            case '5':
-                continue;
-            case '6':
-                continue;
-            case '7':
-                continue;
-            case '8':
-                continue;
-            case '9':
-                continue;
-            case '.':
-                continue;
-            case '-':
-                continue;
-            default:
-                return false;
-        }
-    }
-    return true;
-}
-
-/**
- *
  * @param dir_path
  * @return
  */
-vector<string> ANXTRI::fs::get_files_in_dir( std::string dir_path )
+vector<string> styl::fs::get_files_in_dir( std::string dir_path )
 {
     vector<std::string> file_paths;
     for( auto & p: std::experimental::filesystem::directory_iterator( dir_path ))
@@ -111,7 +85,7 @@ vector<string> ANXTRI::fs::get_files_in_dir( std::string dir_path )
  * @param dir_path
  * @return
  */
-int ANXTRI::fs::get_num_files( std::string dir_path )
+int styl::fs::get_num_files( std::string dir_path )
 {
     int num_files = 0;
 
@@ -126,12 +100,12 @@ int ANXTRI::fs::get_num_files( std::string dir_path )
  * @param date
  * @return
  */
-time_t ANXTRI::date::stot( const std::string & date, const std::string & format )
+time_t styl::date::stot( const std::string & date, const std::string & format )
 {
     const char * time_details = date.c_str();
     time_t result = 0;
     int year = 0, month = 0, day = 0, hour = 0, min = 0, sec = 0;
-    std::string num_format = ANXTRI::date::dftnf( format );
+    std::string num_format = styl::date::dftnf( format );
 
     if( sscanf( time_details, num_format.c_str(), &year, &month, &day, &hour, &min, &sec ))
     {
@@ -159,7 +133,7 @@ time_t ANXTRI::date::stot( const std::string & date, const std::string & format 
  * @param date
  * @return
  */
-std::string ANXTRI::date::ttos( const time_t & date, const std::string & format )
+std::string styl::date::ttos( const time_t & date, const std::string & format )
 {
     const char * c_format = format.c_str();
     std::tm * ptm = std::localtime( &date );
@@ -174,61 +148,61 @@ std::string ANXTRI::date::ttos( const time_t & date, const std::string & format 
  * @param date_format
  * @return
  */
-std::string ANXTRI::date::dftnf( std::string date_format )
+std::string styl::date::dftnf( std::string date_format )
 {
     std::string tmp = date_format;
-    tmp = ANXTRI::string::replace( tmp, "%Y", "%4d" );
-    tmp = ANXTRI::string::replace( tmp, "%m", "%2d" );
-    tmp = ANXTRI::string::replace( tmp, "%d", "%2d" );
-    tmp = ANXTRI::string::replace( tmp, "%H", "%2d" );
-    tmp = ANXTRI::string::replace( tmp, "%M", "%2d" );
-    tmp = ANXTRI::string::replace( tmp, "%S", "%2d" );
+    tmp = styl::string::replace( tmp, "%Y", "%4d" );
+    tmp = styl::string::replace( tmp, "%m", "%2d" );
+    tmp = styl::string::replace( tmp, "%d", "%2d" );
+    tmp = styl::string::replace( tmp, "%H", "%2d" );
+    tmp = styl::string::replace( tmp, "%M", "%2d" );
+    tmp = styl::string::replace( tmp, "%S", "%2d" );
     return tmp;
 }
 
-time_t ANXTRI::date::add_se( const time_t & t, const int & se )
+time_t styl::date::add_se( const time_t & t, const int & se )
 {
     struct tm * tm = localtime( &t );
     tm->tm_sec += se;
     return mktime( tm );
 }
 
-time_t ANXTRI::date::add_mi( const time_t & t, const int & mi )
+time_t styl::date::add_mi( const time_t & t, const int & mi )
 {
     struct tm * tm = localtime( &t );
     tm->tm_min += mi;
     return mktime( tm );
 }
 
-time_t ANXTRI::date::add_hr( const time_t & t, const int & hr )
+time_t styl::date::add_hr( const time_t & t, const int & hr )
 {
     struct tm * tm = localtime( &t );
     tm->tm_hour += hr;
     return mktime( tm );
 }
 
-time_t ANXTRI::date::add_da( const time_t & t, const int & da )
+time_t styl::date::add_da( const time_t & t, const int & da )
 {
     struct tm * tm = localtime( &t );
     tm->tm_mday += da;
     return mktime( tm );
 }
 
-time_t ANXTRI::date::add_wk( const time_t & t, const int & wk )
+time_t styl::date::add_wk( const time_t & t, const int & wk )
 {
     struct tm * tm = localtime( &t );
     tm->tm_wday += wk;
     return mktime( tm );
 }
 
-time_t ANXTRI::date::add_mo( const time_t & t, const int & mo )
+time_t styl::date::add_mo( const time_t & t, const int & mo )
 {
     struct tm * tm = localtime( &t );
     tm->tm_mon += mo;
     return mktime( tm );
 }
 
-time_t ANXTRI::date::add_yr( const time_t & t, const int & yr )
+time_t styl::date::add_yr( const time_t & t, const int & yr )
 {
     struct tm * tm = localtime( &t );
     tm->tm_year += yr;
@@ -236,42 +210,42 @@ time_t ANXTRI::date::add_yr( const time_t & t, const int & yr )
 }
 
 
-double ANXTRI::date::diff_se( const time_t & end, const time_t & start )
+double styl::date::diff_se( const time_t & end, const time_t & start )
 {
     return difftime( end, start );
 }
 
-double ANXTRI::date::diff_mi( const time_t & end, const time_t & start )
+double styl::date::diff_mi( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 60;
 }
 
-double ANXTRI::date::diff_hr( const time_t & end, const time_t & start )
+double styl::date::diff_hr( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 3600;
 }
 
-double ANXTRI::date::diff_da( const time_t & end, const time_t & start )
+double styl::date::diff_da( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 86400;
 }
 
-double ANXTRI::date::diff_wk( const time_t & end, const time_t & start )
+double styl::date::diff_wk( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 604800;
 }
 
-double ANXTRI::date::diff_mo( const time_t & end, const time_t & start )
+double styl::date::diff_mo( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 86400; // todo
 }
 
-double ANXTRI::date::diff_yr( const time_t & end, const time_t & start )
+double styl::date::diff_yr( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 86400; // todo
