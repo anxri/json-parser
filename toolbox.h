@@ -16,12 +16,8 @@
  *
  */
 
-//
-// Created by noxx on 6/3/19.
-//
-
-#ifndef QUAGGA_TOOLBOX_H
-#define QUAGGA_TOOLBOX_H
+#ifndef ANXRI_TOOLBOX_H
+#define ANXRI_TOOLBOX_H
 
 #include <string>
 #include <vector>
@@ -29,15 +25,16 @@
 #include <experimental/filesystem>
 #include <algorithm>
 
-namespace styl
+namespace ANXRI
 {
 
     namespace string
     {
         std::vector<std::string> split( std::string str, char delemiter );
 
-        std::string
-        replace( std::string str, const std::string & from, const std::string & to );
+        std::string replace( std::string str, const std::string & from, const std::string & to );
+        
+        bool is_num( const std::string str );
     }
 
     namespace fs
@@ -88,4 +85,5 @@ namespace styl
         double diff_yr( const time_t & end, const time_t & start );
     }
 }
-#endif //QUAGGA_TOOLBOX_H
+
+#endif

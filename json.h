@@ -21,8 +21,8 @@
 //
 
 
-#ifndef ANXTRI_CPP_LIB_JSON_H
-#define ANXTRI_CPP_LIB_JSON_H
+#ifndef ANXRI_CPP_LIB_JSON_H
+#define ANXRI_CPP_LIB_JSON_H
 
 #include <string>
 #include <vector>
@@ -35,7 +35,7 @@
 #include "toolbox.h"
 #include "json_internal.h"
 
-namespace ANXTRI
+namespace ANXRI
 {
     class Json : public JsonNode
     {
@@ -72,4 +72,4 @@ namespace ANXTRI
         Json decode_json( const std::string & json_str );
 }
 
-#endif //ANXTRI_CPP_LIB_JSON_H
+#endif //ANXRI_CPP_LIB_JSON_H

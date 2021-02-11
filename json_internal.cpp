@@ -16,28 +16,25 @@
  *
  */
 
-//
-// Created by noxx on 4/6/20.
-//
-
 #include "json_internal.h"
 
-using ANXTRI::string::split;
-using ANXTRI::string::replace;
 
-ANXTRI::JsonNode::JsonNode()
+using ANXRI::string::split;
+using ANXRI::string::replace;
+
+ANXRI::JsonNode::JsonNode()
 {
     m_parent = nullptr;
     set_type( T_NULL );
 }
 
-ANXTRI::JsonNode::JsonNode( JsonNode * parent, const type & type )
+ANXRI::JsonNode::JsonNode( JsonNode * parent, const type & type )
 {
     m_parent    = parent;
     m_type      = type;
 }
 
-ANXTRI::JsonNode::JsonNode( const JsonNode & other )
+ANXRI::JsonNode::JsonNode( const JsonNode & other )
 {
     m_type      = other.m_type;
     m_parent    = other.m_parent;
@@ -48,12 +45,12 @@ ANXTRI::JsonNode::JsonNode( const JsonNode & other )
     m_object    = other.m_object;
 }
 
-ANXTRI::JsonNode::~JsonNode()
+ANXRI::JsonNode::~JsonNode()
 {
 
 }
 
-void ANXTRI::JsonNode::set_type( const type & type )
+void ANXRI::JsonNode::set_type( const type & type )
 {
     m_type = type;
 
@@ -68,62 +65,62 @@ void ANXTRI::JsonNode::set_type( const type & type )
     }
 }
 
-const ANXTRI::type & ANXTRI::JsonNode::get_type()
+const ANXRI::type & ANXRI::JsonNode::get_type()
 {
     return m_type;
 }
 
 // double
-ANXTRI::JsonNode & ANXTRI::JsonNode::operator=( const double & value )
+ANXRI::JsonNode & ANXRI::JsonNode::operator=( const double & value )
 {
     m_type = T_NUMBER;
     m_number = value;
     return *this;
 }
 
-ANXTRI::JsonNode::operator double()
+ANXRI::JsonNode::operator double()
 {
     return m_number;
 }
 
 // string
-ANXTRI::JsonNode & ANXTRI::JsonNode::operator=( const std::string & value )
+ANXRI::JsonNode & ANXRI::JsonNode::operator=( const std::string & value )
 {
     m_type = T_STRING;
     m_string = value;
     return *this;
 }
 
-ANXTRI::JsonNode & ANXTRI::JsonNode::operator=( const char * value )
+ANXRI::JsonNode & ANXRI::JsonNode::operator=( const char * value )
 {
     m_type = T_STRING;
     m_string = value;
     return *this;
 }
 
-ANXTRI::JsonNode::operator std::string()
+ANXRI::JsonNode::operator std::string()
 {
     return m_string;
 }
 
 // bool
-ANXTRI::JsonNode & ANXTRI::JsonNode::operator=( const bool & value )
+ANXRI::JsonNode & ANXRI::JsonNode::operator=( const bool & value )
 {
     m_type = T_BOOLEAN;
     m_bool = value;
     return *this;
 }
-ANXTRI::JsonNode::operator bool()
+ANXRI::JsonNode::operator bool()
 {
     return m_bool;
 }
 
-ANXTRI::JsonNode * ANXTRI::JsonNode::get_parent()
+ANXRI::JsonNode * ANXRI::JsonNode::get_parent()
 {
     return m_parent;
 }
 
-ANXTRI::JsonNode & ANXTRI::JsonNode::operator[]( const std::string & index )
+ANXRI::JsonNode & ANXRI::JsonNode::operator[]( const std::string & index )
 {
     if( m_object.find( index ) == m_object.end() )
     {
@@ -133,7 +130,7 @@ ANXTRI::JsonNode & ANXTRI::JsonNode::operator[]( const std::string & index )
     return m_object[index];
 }
 
-ANXTRI::JsonNode & ANXTRI::JsonNode::operator[]( const char * index )
+ANXRI::JsonNode & ANXRI::JsonNode::operator[]( const char * index )
 {
     if( m_object.find( index ) == m_object.end() )
     {
@@ -143,7 +140,7 @@ ANXTRI::JsonNode & ANXTRI::JsonNode::operator[]( const char * index )
     return m_object[index];
 }
 
-ANXTRI::JsonNode & ANXTRI::JsonNode::operator[]( const int & index )
+ANXRI::JsonNode & ANXRI::JsonNode::operator[]( const int & index )
 {
     if( m_array.size() < index || index < 0 )
     {
@@ -153,35 +150,35 @@ ANXTRI::JsonNode & ANXTRI::JsonNode::operator[]( const int & index )
     return m_array[index];
 }
 
-void ANXTRI::JsonNode::push( const ANXTRI::JsonNode & node )
+void ANXRI::JsonNode::push( const ANXRI::JsonNode & node )
 {
     m_array.push_back( node );
 }
 
-void ANXTRI::JsonNode::push( const double & value )
+void ANXRI::JsonNode::push( const double & value )
 {
     m_array.push_back( JsonNode( this, T_NUMBER ));
     m_array[m_array.size()-1] = value;
 }
 
-void ANXTRI::JsonNode::push( const std::string & value )
+void ANXRI::JsonNode::push( const std::string & value )
 {
     m_array.push_back( JsonNode( this, T_STRING ));
     m_array[m_array.size()-1] = value;
 }
 
-void ANXTRI::JsonNode::push( const bool & value )
+void ANXRI::JsonNode::push( const bool & value )
 {
     m_array.push_back( JsonNode( this, T_BOOLEAN ));
     m_array[m_array.size()-1] = value;
 }
 
-void ANXTRI::JsonNode::push()
+void ANXRI::JsonNode::push()
 {
     m_array.push_back( JsonNode( this, T_NULL ));
 }
 
-ANXTRI::JsonNode & ANXTRI::JsonNode::get_last_arr_elem()
+ANXRI::JsonNode & ANXRI::JsonNode::get_last_arr_elem()
 {
     return m_array[m_array.size()-1];
 }

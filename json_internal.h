@@ -20,8 +20,8 @@
 // Created by noxx on 4/6/20.
 //
 
-#ifndef ANXTRI_CPP_LIB_JSON_INTERNAL_H
-#define ANXTRI_CPP_LIB_JSON_INTERNAL_H
+#ifndef ANXRI_CPP_LIB_JSON_INTERNAL_H
+#define ANXRI_CPP_LIB_JSON_INTERNAL_H
 
 #include <string>
 #include <vector>
@@ -29,7 +29,7 @@
 
 #include "toolbox.h"
 
-namespace ANXTRI
+namespace ANXRI
 {
     enum type
     {
@@ -106,4 +106,4 @@ namespace ANXTRI
     };
 }
 
-#endif //ANXTRI_CPP_LIB_JSON_INTERNAL_H
+#endif //ANXRI_CPP_LIB_JSON_INTERNAL_H

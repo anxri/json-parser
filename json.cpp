@@ -29,20 +29,20 @@ using std::string;
 using std::vector;
 using std::ifstream;
 
-using ANXTRI::string::replace;
-using ANXTRI::string::split;
+using ANXRI::string::replace;
+using ANXRI::string::split;
 
-ANXTRI::Json::Json()
+ANXRI::Json::Json()
 {
 }
 
 
-ANXTRI::Json::~Json()
+ANXRI::Json::~Json()
 {
 
 }
 
-ANXTRI::Json::Json( const ANXTRI::Json & other )
+ANXRI::Json::Json( const ANXRI::Json & other )
 {
     m_type      = other.m_type;
     m_parent    = other.m_parent;
@@ -58,7 +58,7 @@ ANXTRI::Json::Json( const ANXTRI::Json & other )
  * @param value
  * @return
  */
-ANXTRI::Json & ANXTRI::Json::operator=( const double & value )
+ANXRI::Json & ANXRI::Json::operator=( const double & value )
 {
     m_number = value;
     return *this;
@@ -69,7 +69,7 @@ ANXTRI::Json & ANXTRI::Json::operator=( const double & value )
  * @param value
  * @return
  */
-ANXTRI::Json & ANXTRI::Json::operator=( const std::string & value )
+ANXRI::Json & ANXRI::Json::operator=( const std::string & value )
 {
     m_string = value;
     return *this;
@@ -80,7 +80,7 @@ ANXTRI::Json & ANXTRI::Json::operator=( const std::string & value )
  * @param value
  * @return
  */
-ANXTRI::Json & ANXTRI::Json::operator=( const bool & value )
+ANXRI::Json & ANXRI::Json::operator=( const bool & value )
 {
     m_bool = value;
     return *this;
@@ -91,7 +91,7 @@ ANXTRI::Json & ANXTRI::Json::operator=( const bool & value )
  * @param obj
  * @return
  */
-ANXTRI::Json & ANXTRI::Json::operator=( ANXTRI::JsonNode other )
+ANXRI::Json & ANXRI::Json::operator=( ANXRI::JsonNode other )
 {
     m_type      = other.m_type;
     m_parent    = other.m_parent;
@@ -108,7 +108,7 @@ ANXTRI::Json & ANXTRI::Json::operator=( ANXTRI::JsonNode other )
  * @param index
  * @return
  */
-ANXTRI::JsonNode & ANXTRI::Json::operator[]( const std::string & index )
+ANXRI::JsonNode & ANXRI::Json::operator[]( const std::string & index )
 {
     if( m_object.find( index ) == m_object.end() )
     {
@@ -123,7 +123,7 @@ ANXTRI::JsonNode & ANXTRI::Json::operator[]( const std::string & index )
  * @param index
  * @return
  */
-ANXTRI::JsonNode & ANXTRI::Json::operator[]( const char * index )
+ANXRI::JsonNode & ANXRI::Json::operator[]( const char * index )
 {
     if( m_object.find( index ) == m_object.end() )
     {
@@ -133,7 +133,7 @@ ANXTRI::JsonNode & ANXTRI::Json::operator[]( const char * index )
     return m_object[index];
 }
 
-ANXTRI::JsonNode & ANXTRI::Json::operator[]( const unsigned long & index )
+ANXRI::JsonNode & ANXRI::Json::operator[]( const unsigned long & index )
 {
     if( m_array.size() <= index || index <= 0 )
     {
@@ -148,7 +148,7 @@ ANXTRI::JsonNode & ANXTRI::Json::operator[]( const unsigned long & index )
  * @param path
  * @return
  */
-std::string ANXTRI::read_json_str( std::string path )
+std::string ANXRI::read_json_str( std::string path )
 {
     std::string json_str;
     ifstream read_history( path );
@@ -181,20 +181,20 @@ std::string ANXTRI::read_json_str( std::string path )
             }
         }
     }
-    return ANXTRI::string::replace(json_str, "\r", "");
+    return ANXRI::string::replace(json_str, "\r", "");
 }
 
-ANXTRI::Json ANXTRI::read_json_obj( std::string path )
+ANXRI::Json ANXRI::read_json_obj( std::string path )
 {
 
 }
 
-void ANXTRI::write_json_str( std::string path, std::string str )
+void ANXRI::write_json_str( std::string path, std::string str )
 {
 
 }
 
-void ANXTRI::write_json_obj( std::string path, ANXTRI::Json obj )
+void ANXRI::write_json_obj( std::string path, ANXRI::Json obj )
 {
 
 }
@@ -204,7 +204,7 @@ void ANXTRI::write_json_obj( std::string path, ANXTRI::Json obj )
  * @param obj
  * @return
  */
-std::string ANXTRI::encode_json( ANXTRI::JsonNode & obj )
+std::string ANXRI::encode_json( ANXRI::JsonNode & obj )
 {
     std::string encoded_string              = "";
     std::string comma                       = "";
@@ -214,7 +214,7 @@ std::string ANXTRI::encode_json( ANXTRI::JsonNode & obj )
 
     unsigned int iteration_count            = 0;        // counts finished iterations
     unsigned int object_count               = 1;        // counts nested objects
-    std::map<unsigned int, ANXTRI::JsonNode>  obj_stack;  //
+    std::map<unsigned int, ANXRI::JsonNode>  obj_stack;  //
     std::map<unsigned int, std::string>     str_stack;  //
 
     /*
@@ -359,7 +359,7 @@ std::string ANXTRI::encode_json( ANXTRI::JsonNode & obj )
     {
         std::string placeholder = "ADR_" + std::to_string( i );
         std::string str = str_stack[i];
-        encoded_string = ANXTRI::string::replace( encoded_string, placeholder, str );
+        encoded_string = ANXRI::string::replace( encoded_string, placeholder, str );
     }
 
     /*
@@ -382,7 +382,7 @@ std::string ANXTRI::encode_json( ANXTRI::JsonNode & obj )
  * @param json_str
  * @return
  */
-ANXTRI::Json ANXTRI::decode_json( const std::string & json_str )
+ANXRI::Json ANXRI::decode_json( const std::string & json_str )
 {
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
@@ -392,7 +392,7 @@ ANXTRI::Json ANXTRI::decode_json( const std::string & json_str )
 
     if( json_str[0] == '\"' && json_str[json_str.size()-1] == '\"' ) // string
     {
-        std::string str_val = ANXTRI::string::replace( json_str, "\"", "" );
+        std::string str_val = ANXRI::string::replace( json_str, "\"", "" );
         root = str_val;
         return root;
     }
@@ -409,7 +409,7 @@ ANXTRI::Json ANXTRI::decode_json( const std::string & json_str )
         return root;
     }
 
-    else if( ANXTRI::string::is_num( json_str )) // number
+    else if( ANXRI::string::is_num( json_str )) // number
     {
         root = stod( json_str );
         return root;
@@ -482,7 +482,7 @@ ANXTRI::Json ANXTRI::decode_json( const std::string & json_str )
                         (*json_node_pointer)[key_value[0]] = key_value[1];
                     }
 
-                    else if( ANXTRI::string::is_num( key_value[1] )) // number
+                    else if( ANXRI::string::is_num( key_value[1] )) // number
                     {
                         key_value[0] = replace( key_value[0], "\"", "" );
                         (*json_node_pointer)[key_value[0]] = stod( key_value[1] );
@@ -519,7 +519,7 @@ ANXTRI::Json ANXTRI::decode_json( const std::string & json_str )
                     (*json_node_pointer).push( key_value[0] );
                 }
 
-                else if( ANXTRI::string::is_num( key_value[0] )) // number
+                else if( ANXRI::string::is_num( key_value[0] )) // number
                 {
                     (*json_node_pointer).push( stod( key_value[0] ));
                 }

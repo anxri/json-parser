@@ -25,12 +25,15 @@ using namespace std;
 
 int main()
 {
-    std::string json_str = ANXTRI::read_json_str( "./json_files/canada.json" );
-    cout << json_str << endl;
-
-    ANXTRI::Json json_obj = ANXTRI::decode_json( json_str );
+    std::string json_str = ANXRI::read_json_str( "/home/noxx/projects/json-parser/canada.json" );
+    ANXRI::Json json_obj = ANXRI::decode_json( json_str );
+    
     string a = json_obj["type"];
+    auto number = json_obj["features"][0]["geometry"]["coordinates"][0][0][0];
     cout << a << endl;
+    cout << number.m_number << endl;
+    
+    
 
     return 0;
 }

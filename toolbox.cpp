@@ -31,7 +31,7 @@ using std::vector;
  * @param delemiter
  * @return
  */
-vector<string> styl::string::split( std::string str, char delemiter )
+vector<string> ANXRI::string::split( std::string str, char delemiter )
 {
     vector<std::string> split_str;
     std::string tmp = "";
@@ -54,10 +54,10 @@ vector<string> styl::string::split( std::string str, char delemiter )
  * @param to
  * @return
  */
-std::string styl::string::replace( std::string str, const std::string & from, const std::string & to )
+std::string ANXRI::string::replace( std::string str, const std::string & from, const std::string & to )
 {
     size_t start_pos = 0;
-    while((start_pos = str.find( from, start_pos )) != std::string::npos )
+    while(( start_pos = str.find( from, start_pos )) != std::string::npos )
     {
         str.replace( start_pos, from.length(), to );
         start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
@@ -65,12 +65,41 @@ std::string styl::string::replace( std::string str, const std::string & from, co
     return str;
 }
 
+bool ANXRI::string::is_num( const std::string str )
+{
+    if( str.size() == 0 )
+        return false;
+    
+    for( int i = 0; i < str.size(); i++ )
+    {
+        if(
+            str[i] != '1' &&
+            str[i] != '2' &&
+            str[i] != '3' &&
+            str[i] != '4' &&
+            str[i] != '5' &&
+            str[i] != '6' &&
+            str[i] != '7' &&
+            str[i] != '8' &&
+            str[i] != '9' &&
+            str[i] != '0' &&
+            str[i] != '-' &&
+            str[i] != '.'
+        )
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
 /**
  *
  * @param dir_path
  * @return
  */
-vector<string> styl::fs::get_files_in_dir( std::string dir_path )
+vector<string> ANXRI::fs::get_files_in_dir( std::string dir_path )
 {
     vector<std::string> file_paths;
     for( auto & p: std::experimental::filesystem::directory_iterator( dir_path ))
@@ -85,7 +114,7 @@ vector<string> styl::fs::get_files_in_dir( std::string dir_path )
  * @param dir_path
  * @return
  */
-int styl::fs::get_num_files( std::string dir_path )
+int ANXRI::fs::get_num_files( std::string dir_path )
 {
     int num_files = 0;
 
@@ -100,12 +129,12 @@ int styl::fs::get_num_files( std::string dir_path )
  * @param date
  * @return
  */
-time_t styl::date::stot( const std::string & date, const std::string & format )
+time_t ANXRI::date::stot( const std::string & date, const std::string & format )
 {
     const char * time_details = date.c_str();
     time_t result = 0;
     int year = 0, month = 0, day = 0, hour = 0, min = 0, sec = 0;
-    std::string num_format = styl::date::dftnf( format );
+    std::string num_format = ANXRI::date::dftnf( format );
 
     if( sscanf( time_details, num_format.c_str(), &year, &month, &day, &hour, &min, &sec ))
     {
@@ -133,7 +162,7 @@ time_t styl::date::stot( const std::string & date, const std::string & format )
  * @param date
  * @return
  */
-std::string styl::date::ttos( const time_t & date, const std::string & format )
+std::string ANXRI::date::ttos( const time_t & date, const std::string & format )
 {
     const char * c_format = format.c_str();
     std::tm * ptm = std::localtime( &date );
@@ -148,61 +177,61 @@ std::string styl::date::ttos( const time_t & date, const std::string & format )
  * @param date_format
  * @return
  */
-std::string styl::date::dftnf( std::string date_format )
+std::string ANXRI::date::dftnf( std::string date_format )
 {
     std::string tmp = date_format;
-    tmp = styl::string::replace( tmp, "%Y", "%4d" );
-    tmp = styl::string::replace( tmp, "%m", "%2d" );
-    tmp = styl::string::replace( tmp, "%d", "%2d" );
-    tmp = styl::string::replace( tmp, "%H", "%2d" );
-    tmp = styl::string::replace( tmp, "%M", "%2d" );
-    tmp = styl::string::replace( tmp, "%S", "%2d" );
+    tmp = ANXRI::string::replace( tmp, "%Y", "%4d" );
+    tmp = ANXRI::string::replace( tmp, "%m", "%2d" );
+    tmp = ANXRI::string::replace( tmp, "%d", "%2d" );
+    tmp = ANXRI::string::replace( tmp, "%H", "%2d" );
+    tmp = ANXRI::string::replace( tmp, "%M", "%2d" );
+    tmp = ANXRI::string::replace( tmp, "%S", "%2d" );
     return tmp;
 }
 
-time_t styl::date::add_se( const time_t & t, const int & se )
+time_t ANXRI::date::add_se( const time_t & t, const int & se )
 {
     struct tm * tm = localtime( &t );
     tm->tm_sec += se;
     return mktime( tm );
 }
 
-time_t styl::date::add_mi( const time_t & t, const int & mi )
+time_t ANXRI::date::add_mi( const time_t & t, const int & mi )
 {
     struct tm * tm = localtime( &t );
     tm->tm_min += mi;
     return mktime( tm );
 }
 
-time_t styl::date::add_hr( const time_t & t, const int & hr )
+time_t ANXRI::date::add_hr( const time_t & t, const int & hr )
 {
     struct tm * tm = localtime( &t );
     tm->tm_hour += hr;
     return mktime( tm );
 }
 
-time_t styl::date::add_da( const time_t & t, const int & da )
+time_t ANXRI::date::add_da( const time_t & t, const int & da )
 {
     struct tm * tm = localtime( &t );
     tm->tm_mday += da;
     return mktime( tm );
 }
 
-time_t styl::date::add_wk( const time_t & t, const int & wk )
+time_t ANXRI::date::add_wk( const time_t & t, const int & wk )
 {
     struct tm * tm = localtime( &t );
     tm->tm_wday += wk;
     return mktime( tm );
 }
 
-time_t styl::date::add_mo( const time_t & t, const int & mo )
+time_t ANXRI::date::add_mo( const time_t & t, const int & mo )
 {
     struct tm * tm = localtime( &t );
     tm->tm_mon += mo;
     return mktime( tm );
 }
 
-time_t styl::date::add_yr( const time_t & t, const int & yr )
+time_t ANXRI::date::add_yr( const time_t & t, const int & yr )
 {
     struct tm * tm = localtime( &t );
     tm->tm_year += yr;
@@ -210,42 +239,42 @@ time_t styl::date::add_yr( const time_t & t, const int & yr )
 }
 
 
-double styl::date::diff_se( const time_t & end, const time_t & start )
+double ANXRI::date::diff_se( const time_t & end, const time_t & start )
 {
     return difftime( end, start );
 }
 
-double styl::date::diff_mi( const time_t & end, const time_t & start )
+double ANXRI::date::diff_mi( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 60;
 }
 
-double styl::date::diff_hr( const time_t & end, const time_t & start )
+double ANXRI::date::diff_hr( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 3600;
 }
 
-double styl::date::diff_da( const time_t & end, const time_t & start )
+double ANXRI::date::diff_da( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 86400;
 }
 
-double styl::date::diff_wk( const time_t & end, const time_t & start )
+double ANXRI::date::diff_wk( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 604800;
 }
 
-double styl::date::diff_mo( const time_t & end, const time_t & start )
+double ANXRI::date::diff_mo( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 86400; // todo
 }
 
-double styl::date::diff_yr( const time_t & end, const time_t & start )
+double ANXRI::date::diff_yr( const time_t & end, const time_t & start )
 {
     int s = difftime( end, start );
     return s / 86400; // todo
